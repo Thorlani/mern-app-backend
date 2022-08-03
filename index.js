@@ -5,6 +5,8 @@ require('dotenv/config');
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
+const port = process.env.PORT || 3001
+
 //middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -26,6 +28,6 @@ app.get('/', (req, res) => {
     res.send("Blog Project")
 })
 
-app.listen(3001, () => {
+app.listen(port, () => {
     console.log('Server is up and running');
 })
