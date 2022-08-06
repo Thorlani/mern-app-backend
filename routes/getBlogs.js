@@ -10,4 +10,13 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/:postId', async (req, res) => {
+    try {
+        const posts = await Post.findById(req.params.postId)
+        res.json(posts)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 module.exports = router
