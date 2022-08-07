@@ -1,26 +1,17 @@
 const router = require('express').Router()
-const {auth} = require('./routeGuard')
 const Post = require('../model/Post')
-const multer  = require('multer')
+const upload = require('../utils/multer')
+const {cloudinary} = require('../utils/cloudinary')
 
-//setting multer storage engine
-const storage = multer.diskStorage({
-    destination: (req, file, cb) =>{
-        cb(null, '../client/public/uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-})
 
-//configuring multer upload engine
-const upload = multer({storage: storage})
+router.post('/', upload.single("postImage"),async (req, res) => { 
 
-router.post('/', upload.single('postImage'), async (req, res) => {
+    const result = await  cloudinary.uploader.upload(req.file.path)
+
     const post = new Post({
         title: req.body.title,
         content: req.body.content,
-        imagePath: req.file.originalname
+        imagePath: result.secure_url
     })
     try {
         const blogPost = await post.save()

@@ -12,6 +12,7 @@ const port = process.env.PORT || 3001
 //middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ limit: "50mb", extended: false }));
 
 //Import Routes
 const authRoute = require('./routes/auth')
