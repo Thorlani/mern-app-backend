@@ -10,6 +10,10 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    imagePath: {
+        data: Buffer,
+        contentType: String
+    },
     date: {
         type: Date,
         default: Date.now
