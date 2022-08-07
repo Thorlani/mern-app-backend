@@ -11,8 +11,8 @@ const postSchema = new mongoose.Schema({
         required: true,
     },
     imagePath: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        required: true
     },
     date: {
         type: Date,
